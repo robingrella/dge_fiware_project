@@ -1,0 +1,103 @@
+version: '3.7'
+services:
+  ############################################################
+  # FIWARE context broker (Orion)                            #
+  ############################################################
+  orion:
+    image: fiware/orion:2.4.0
+    restart: unless-stopped
+    command: -dbhost orion-db -dbAuthDb admin -dbuser orion -dbpwd orion
+    depends_on:
+      - orion-db
+    ports:
+      - '1026:1026'
+    networks:
+      - orion
+      - orion_database
+    environment:
+      - TZ=Europe/Berlin
+  ############################################################
+  # Time-Series Data (Quantum Leap)                          #
+  ############################################################
+  quantum:
+    image: smartsdk/quantumleap:0.7.5
+    restart: unless-stopped
+    depends_on:
+      - quantum-db
+    networks:
+      - orion
+      - quantum_database
+    volumes:
+      - ./quantumleap.config.yml:/config.yml:ro
+    environment:
+      - TZ=Europe/Berlin
+      - POSTGRES_HOST=quantum-db
+      - POSTGRES_DB_PASS=quantumleap
+      - QL_CONFIG=/config.yml
+    healthcheck:
+      test: curl --fail -s http://quantum:8668/v2/version || exit 1
+  ############################################################
+  # Context producers                                        #
+  ############################################################
+
+  # TODO: Here goes the service definition of your custom context producers
+
+  ############################################################
+  # External services                                        #
+  ############################################################
+  grafana:
+    image: grafana/grafana:6.7.3
+    restart: unless-stopped
+    depends_on:
+      - quantum-db
+    ports:
+      - '8080:3000'
+    networks:
+      - quantum_database
+    volumes:
+      - grafana:/var/lib/grafana
+    environment:
+      - TZ=Europe/Berlin
+  ############################################################
+  # Databases for FIWARE components                          #
+  ############################################################
+  orion-db:
+    image: mongo:3.6.18
+    restart: unless-stopped
+    networks:
+      - orion_database
+    volumes:
+      - orion_data:/data/db
+    environment:
+      - TZ=Europe/Berlin
+      - MONGO_INITDB_ROOT_USERNAME=orion
+      - MONGO_INITDB_ROOT_PASSWORD=orion
+  quantum-db:
+    image: timescale/timescaledb-postgis:latest-pg11
+    restart: unless-stopped
+    shm_size: '256mb'
+    networks:
+      - quantum_database
+    volumes:
+      - quantum_data:/var/lib/postgresql/data
+    environment:
+      - TZ=Europe/Berlin
+      - TIMESCALEDB_TELEMETRY=off
+      - POSTGRES_USER=quantumleap
+      - POSTGRES_PASSWORD=quantumleap
+
+############################################################
+# Volumes                                                  #
+############################################################
+volumes:
+  orion_data: ~
+  quantum_data: ~
+  grafana: ~
+
+############################################################
+# Networks                                                 #
+############################################################
+networks:
+  orion: ~
+  orion_database: ~
+  quantum_database: ~
