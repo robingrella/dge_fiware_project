@@ -40,7 +40,17 @@ services:
   # Context producers                                        #
   ############################################################
 
-  # TODO: Here goes the service definition of your custom context producers
+  tutorial:
+    image: node
+    container_name: context-producer
+    networks:
+        - default
+    expose:
+        - "3000"
+    ports:
+        - "3000:3000"
+    environment:
+
 
   ############################################################
   # External services                                        #
