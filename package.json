@@ -1,0 +1,10 @@
+{ 
+    "type": "module",
+    "name": "fiware-context-provider",
+    "version": "1.0.0",
+    "description": "",
+    "main": "src/context-provider.js",
+    "scripts": {
+        "start": "node --experimental-modules src/context-provider.js"
+    }
+}
