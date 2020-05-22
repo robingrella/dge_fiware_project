@@ -1,10 +1,12 @@
 import NGSI from 'ngsi-parser';
 import fetch from 'node-fetch';
+import config from './config.js';
 
-const pvRequestURL = 'https://api.scit-bo.de/pv?apiKey=af7d173c57f5c4816747ada9e7aad23e';
-const weatherRequestURL = 'https://api.scit-bo.de/weather?apiKey=af7d173c57f5c4816747ada9e7aad23e';
 
-function requestData() { 
+const pvRequestURL = config.get('pv_request_url') + '?apiKey=' + config.get('api_key');
+const weatherRequestURL = config.get('weather_request_url') + '?apiKey=' + config.get('api_key');
+
+function requestPV() { 
 
 	fetch(pvRequestURL, {
 		method: 'get'
@@ -17,6 +19,10 @@ function requestData() {
 			console.log(entity);
 		}
 	);
+
+} 
+
+function requestWeather() { 
 	
 	fetch(weatherRequestURL, {
 		method: 'get'
@@ -31,4 +37,5 @@ function requestData() {
 	);
 } 
 
-requestData();
+setInterval(requestPV, 900000);  // function runs every 15 minutes
+setInterval(requestWeather, 60000);  // function runs every minute
