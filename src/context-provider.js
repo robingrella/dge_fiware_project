@@ -35,6 +35,12 @@ function requestWeather() {
 			json.type = "WeatherObserved";
 			var entity = NGSI.parseEntity(json);
 			console.log(entity);
+			fetch(config.get('context_broker_url'), {
+				method: 'post',
+				body: entity
+			  }).then(function(response) {
+				return response.json();
+			});
 		}
 	);
 } 
