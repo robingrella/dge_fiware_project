@@ -13,7 +13,8 @@ function requestPV() {
 	})
 	.then(res => res.json())
 	.then(json => {
-			json.id = Math.floor(Math.random() * 101);     // returns a random int in range 0 to 100
+			//json.id = Math.floor(Math.random() * 101);     // returns a random int in range 0 to 100
+			json.id = "urn:ngsi-ld:PV:001";
 			json.type = "PV";
 			var entity = NGSI.parseEntity(json);
 			console.log(entity);
@@ -29,7 +30,8 @@ function requestWeather() {
 	})
 	.then(res => res.json())
 	.then(json => {
-			json.id = Math.floor(Math.random() * 101);     // returns a random int in range 0 to 100
+			//json.id = Math.floor(Math.random() * 101);     // returns a random int in range 0 to 100
+			json.id = "urn:ngsi-ld:WeatherObserved:001";
 			json.type = "WeatherObserved";
 			var entity = NGSI.parseEntity(json);
 			console.log(entity);
