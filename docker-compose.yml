@@ -40,7 +40,7 @@ services:
   ############################################################
 
   my-context-provider:
-    image: node:12.16.1
+    build: .
     container_name: my-context-provider
     networks:
         - default
