@@ -5,12 +5,12 @@ import config from './config.js';
 
 const pvRequestURL = config.get('pv_request_url') + '?apiKey=' + config.get('api_key');
 const weatherRequestURL = config.get('weather_request_url') + '?apiKey=' + config.get('api_key');
-const contextBrokerEntitiesURL = config.get('context_broker_url') + "entities";
+const contextBrokerEntitiesURL = config.get('context_broker_url') + "entities?options=upsert";
 
 function requestPV() { 
 
 	fetch(pvRequestURL, {
-		method: 'get'
+		method: 'GET'
 	})
 	.then(res => res.json())
 	.then(json => {
@@ -22,14 +22,17 @@ function requestPV() {
 
 			postEntity(entity);
 		}
-	);
+	)
+	.catch((err) => {
+		console.log(err);
+	});
 
 } 
 
 function requestWeather() { 
 	
 	fetch(weatherRequestURL, {
-		method: 'get'
+		method: 'GET'
 	})
 	.then(res => res.json())
 	.then(json => {
@@ -41,7 +44,10 @@ function requestWeather() {
 
 			postEntity(entity);
 		}
-	);
+	)
+	.catch((err) => {
+		console.log(err);
+	});
 } 
 
 function postEntity(entity) {
@@ -53,16 +59,10 @@ function postEntity(entity) {
 		},
 		body : JSON.stringify(entity)
 	})
-	.then(res => res.json())
-	.then(resJSON => {
-		console.log(resJSON);
-	})
 	.catch((err) => {
 		console.log(err);
-		reject(err);
 	});
 }
-
 
 setInterval(requestPV, 900000);  // function runs every 15 minutes
 setInterval(requestWeather, 10000);  // function runs every minute
