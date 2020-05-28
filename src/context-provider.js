@@ -65,4 +65,4 @@ function postEntity(entity) {
 
 
 setInterval(requestPV, 900000);  // function runs every 15 minutes
-setInterval(requestWeather, 60000);  // function runs every minute
+setInterval(requestWeather, 10000);  // function runs every minute

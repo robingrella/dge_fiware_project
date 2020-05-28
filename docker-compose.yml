@@ -43,12 +43,11 @@ services:
     build: .
     container_name: my-context-provider
     networks:
-        - default
+        - orion
     expose:
         - "3000"
     ports:
         - "3000:3000"
-    tty: true
 
   ############################################################
   # External services                                        #

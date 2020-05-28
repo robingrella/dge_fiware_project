@@ -27,7 +27,7 @@ var config = convict({
   },
   context_broker_url: {
     format: 'url',
-    default: 'http://localhost:1026/v2/'
+    default: 'http://orion:1026/v2/'
   },
   api_port: {
     doc: 'The port to bind.',
