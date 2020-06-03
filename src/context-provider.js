@@ -16,7 +16,7 @@ function requestPV() {
 	.then(json => {
 			//json.id = Math.floor(Math.random() * 101);     // returns a random int in range 0 to 100
 			json.id = "urn:ngsi-ld:PV:001";
-			json.type = "PV";
+			json.type = "ThreePhaseAcMeasurement";
 			var entity = NGSI.parseEntity(json);
 			console.log(entity);
 
@@ -65,4 +65,4 @@ function postEntity(entity) {
 }
 
 setInterval(requestPV, 900000);  // function runs every 15 minutes
-setInterval(requestWeather, 10000);  // function runs every minute
+setInterval(requestWeather, 60000);  // function runs every minute
