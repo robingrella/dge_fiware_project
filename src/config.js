@@ -13,21 +13,25 @@ var config = convict({
   },
   weather_request_url: {
     format: 'url',
-    default: 'https://api.scit-bo.de/weather'
+    default: 'https://api.scit-bo.de/weather',
+    env: 'WEATHER_REQUEST_URL',
   },
   pv_request_url: {
     format: 'url',
-    default: 'https://api.scit-bo.de/pv'
+    default: 'https://api.scit-bo.de/pv',
+    env: 'PV_REQUEST_URL',
   },
   api_key: {
     doc: 'API key to request the context data',
     format: '*',
     default: 'af7d173c57f5c4816747ada9e7aad23e',
-    sensitive: false
+    sensitive: false,
+    env: 'API_KEY'
   },
   context_broker_url: {
     format: 'url',
-    default: 'http://orion:1026/v2/'
+    default: 'http://orion:1026/v2/',
+    env: 'CONTEXT_BROKER_URL',
   },
   api_port: {
     doc: 'The port to bind.',

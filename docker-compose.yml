@@ -48,6 +48,11 @@ services:
         - "3000"
     ports:
         - "3000:3000"
+    environment:
+      - WEATHER_REQUEST_URL=https://api.scit-bo.de/weather
+      - PV_REQUEST_URL=https://api.scit-bo.de/pv
+      - CONTEXT_BROKER_URL=http://orion:1026/v2/
+      - API_KEY=af7d173c57f5c4816747ada9e7aad23e
 
   ############################################################
   # External services                                        #
