@@ -16,10 +16,13 @@ function requestPV() {
 	.then(json => {
 			json.id = "urn:ngsi-ld:PV:001";
 			json.type = "ThreePhaseAcMeasurement";
+			
 			var entity = NGSI.parseEntity(json);
-			console.log(entity);
-
-			postEntity(entity);
+			var myJSON = JSON.stringify(entity); 
+			var newmyJSON = myJSON.replace(new RegExp("Float", "g"), "Number");
+			var jsonObj = JSON.parse(newmyJSON);
+			console.log(jsonObj);
+			postEntity(jsonObj);
 		}
 	)
 	.catch((err) => {
@@ -36,10 +39,13 @@ function requestWeather() {
 	.then(json => {
 			json.id = "urn:ngsi-ld:WeatherObserved:001";
 			json.type = "WeatherObserved";
-			var entity = NGSI.parseEntity(json);
-			console.log(entity);
 
-			postEntity(entity);
+			var entity = NGSI.parseEntity(json);
+			var myJSON = JSON.stringify(entity); 
+			var newmyJSON = myJSON.replace(new RegExp("Float", "g"), "Number");
+			var jsonObj = JSON.parse(newmyJSON);
+			console.log(jsonObj);
+			postEntity(jsonObj);
 		}
 	)
 	.catch((err) => {
