@@ -1,0 +1,67 @@
+curl -iX POST \
+  'http://localhost:1026/v2/subscriptions/' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "description": "Notify QuantumLeap on weather data received",
+  "subject": {
+    "entities": [
+      {
+        "idPattern": "urn:ngsi-ld:WeatherObserved.*"
+      }
+    ],
+    "condition": {
+      "attrs": [
+        "dewpoint",
+        "temperature",
+		"relativeHumidity",
+		"precipitation",
+		"windDirection",
+		"windSpeed",
+		"atmosphericPressure",
+		"solarRadiation"
+      ]
+    }
+  },
+  "notification": {
+    "http": {
+      "url": "http://quantum:8668/v2/notify"
+    },
+    "attrs": [
+      "dewpoint", "temperature", "relativeHumidity", "precipitation", "windDirection", "windSpeed", "atmosphericPressure", "solarRadiation"
+    ],
+    "metadata": ["dateCreated", "dateModified"]
+  },
+  "throttling": 1
+}'
+
+curl -iX POST \
+  'http://localhost:1026/v2/subscriptions/' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "description": "Notify QuantumLeap on photovoltaic data received ",
+  "subject": {
+    "entities": [
+      {
+        "idPattern": "urn:ngsi-ld:PV*"
+      }
+    ],
+    "condition": {
+      "attrs": [
+        "activePowerIn",
+        "activePowerOut",
+		"reactivePowerIn",
+		"reactivePowerOut"
+      ]
+    }
+  },
+  "notification": {
+    "http": {
+      "url": "http://quantum:8668/v2/notify"
+    },
+    "attrs": [
+              "activePowerIn", "activePowerOut", "reactivePowerIn", "reactivePowerOut"
+    ],
+    "metadata": ["dateCreated", "dateModified"]
+  },
+  "throttling": 1
+}'
