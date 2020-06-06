@@ -24,6 +24,8 @@ services:
     restart: unless-stopped
     depends_on:
       - quantum-db
+    ports:
+      - '8668:8668'
     networks:
       - orion
       - quantum_database
@@ -45,9 +47,9 @@ services:
     networks:
         - orion
     expose:
-        - "3000"
+        - "3004"
     ports:
-        - "3000:3000"
+        - "3004:3004"
     environment:
       - WEATHER_REQUEST_URL=https://api.scit-bo.de/weather
       - PV_REQUEST_URL=https://api.scit-bo.de/pv
@@ -75,6 +77,7 @@ services:
   ############################################################
   orion-db:
     image: mongo:3.6.18
+    hostname: orion-db
     restart: unless-stopped
     networks:
       - orion_database
@@ -86,8 +89,11 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=orion
   quantum-db:
     image: timescale/timescaledb-postgis:latest-pg11
+    hostname: quantum-db
     restart: unless-stopped
     shm_size: '256mb'
+    ports:
+      - "5432:5432"
     networks:
       - quantum_database
     volumes:
