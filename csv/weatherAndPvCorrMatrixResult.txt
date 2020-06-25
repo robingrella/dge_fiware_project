@@ -1,0 +1,18 @@
+                    activePowerOut reactivePowerOut activePowerIn
+dewpoint                -0.3861363       0.44093705            NA
+temperature              0.5815518      -0.25068739            NA
+relativeHumidity        -0.5541189       0.33715346            NA
+precipitation                   NA               NA            NA
+windDirection           -0.2691311       0.12565863            NA
+windSpeed                0.2396513      -0.05871096            NA
+atmosphericPressure      0.5916331      -0.28606373            NA
+solarRadiation           0.3151488      -0.16430361            NA
+                    reactivePowerIn
+dewpoint                         NA
+temperature                      NA
+relativeHumidity                 NA
+precipitation                    NA
+windDirection                    NA
+windSpeed                        NA
+atmosphericPressure              NA
+solarRadiation                   NA

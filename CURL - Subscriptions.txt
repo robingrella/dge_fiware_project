@@ -11,14 +11,7 @@ curl -iX POST \
     ],
     "condition": {
       "attrs": [
-        "dewpoint",
-        "temperature",
-		"relativeHumidity",
-		"precipitation",
-		"windDirection",
-		"windSpeed",
-		"atmosphericPressure",
-		"solarRadiation"
+        "dewpoint", "temperature", "relativeHumidity", "precipitation", "windDirection", "windSpeed", "atmosphericPressure", "solarRadiation"
       ]
     }
   },
@@ -47,10 +40,7 @@ curl -iX POST \
     ],
     "condition": {
       "attrs": [
-        "activePowerIn",
-        "activePowerOut",
-		"reactivePowerIn",
-		"reactivePowerOut"
+        "activePowerIn", "activePowerOut", "reactivePowerIn","reactivePowerOut"
       ]
     }
   },
