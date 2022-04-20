@@ -8,7 +8,7 @@
         "start": "node --experimental-modules src/context-provider.js"
     },
     "dependencies": {
-        "convict": "^6.0.0",
+        "convict": "^6.2.2",
         "convict-format-with-validator": "^6.0.0",
         "esm": "^3.2.25",
         "ngsi-parser": "^2.2.5",
